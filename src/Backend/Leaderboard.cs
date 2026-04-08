@@ -71,7 +71,7 @@ namespace Backend
         {
             if (start < 0 || end < 0 || start > end)
             {
-                throw new ArgumentOutOfRangeException($"Start {start} or end {end} is invalid. Expect: 0 < start <= end. Input start: {start}. Input end: {end}.");
+                throw new ArgumentOutOfRangeException($"Start or end is invalid. Expect: 0 < start <= end. Input start: {start}. Input end: {end}.");
             }
 
             if (end > (this.root?.Size ?? 0))
@@ -110,6 +110,11 @@ namespace Backend
                 throw new ArgumentOutOfRangeException($"Low and high should be no less than zero. Input low: {low}. Input high: {high}.");
             }
 
+            if (!this.idToCustomer.ContainsKey(id))
+            {
+                throw new ArgumentException($"Id {id} does not exist.");
+            }
+
             var customer = this.idToCustomer[id];
             if (customer.Score < 0)
             {
@@ -129,7 +134,7 @@ namespace Backend
 
             if (high >= rank)
             {
-                throw new ArgumentOutOfRangeException($"High should not exceed the rank of the customer. The rank of the customer is {rank}. Input high: {high}.");
+                throw new ArgumentOutOfRangeException($"High should be less than the rank of the customer. The rank of the customer is {rank}. Input high: {high}.");
             }
 
             if (low > this.root!.Size - rank)
