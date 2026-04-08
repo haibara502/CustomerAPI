@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Contract\Contract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\config\stylecop.json" />
+  </ItemGroup>
+
 </Project>
