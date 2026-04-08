@@ -127,17 +127,17 @@ namespace Backend
                 this.rwlock.ExitReadLock();
             }
 
-            if (low >= rank)
+            if (high >= rank)
             {
-                throw new ArgumentOutOfRangeException($"Low should not exceed the rank of the customer. The rank of the customer is {rank}. Input low: {low}.");
+                throw new ArgumentOutOfRangeException($"High should not exceed the rank of the customer. The rank of the customer is {rank}. Input high: {high}.");
             }
 
-            if (high > this.root!.Size - rank)
+            if (low > this.root!.Size - rank)
             {
-                throw new ArgumentOutOfRangeException($"High should not exceed the total number of customers on the leaderboard minus the rank. Total number of customers on the leaderboard is {this.root!.Size}. The rank of the customer is {rank}. Input high: {high}.");
+                throw new ArgumentOutOfRangeException($"Low should not exceed the total number of customers on the leaderboard minus the rank. Total number of customers on the leaderboard is {this.root!.Size}. The rank of the customer is {rank}. Input low: {low}.");
             }
 
-            return this.GetCustomerByRank(rank - low, rank + high);
+            return this.GetCustomerByRank(rank - high, rank + low);
         }
     }
 }

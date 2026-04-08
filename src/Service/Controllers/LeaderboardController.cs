@@ -56,12 +56,12 @@ namespace Service
         [HttpGet("{customerid}")]
         public IActionResult GetCustomersById(
             [FromRoute] int customerid,
-            [FromQuery] int high,
-            [FromQuery] int low)
+            [FromQuery] int? high,
+            [FromQuery] int? low)
         {
             try
             {
-                var items = this.leaderboard.GetCustomerById(customerid, high, low);
+                var items = this.leaderboard.GetCustomerById(customerid, high ?? 0, low ?? 0);
                 return this.Ok(JsonConvert.SerializeObject(items));
             }
             catch (Exception ex)
